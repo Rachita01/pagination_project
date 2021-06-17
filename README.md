@@ -33,3 +33,7 @@ Applied for loop from 1 to totalPosts/postsPerPage
 Imported Pagination.js to App.js and sent two props totalPosts which is equal to posts.length and postsPerPage.
 
 To apply pagination, we have to pass one more prop called paginate to pagination which will take number as an argumnet and will setCurrentPage to that number.
+
+**Screenshot of output:-**
+![image](https://user-images.githubusercontent.com/27857747/122382382-7ecf9500-cf87-11eb-81f5-7ccb8388aa2c.png)
+
