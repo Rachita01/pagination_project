@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+**Prerequisite :-** 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+   1.React app created using command - _npx create-react-app projectname_
 
-## Available Scripts
+2. Install axios using command - _npm i axios_
 
-In the project directory, you can run:
+3. Copy the path of posts api from _jsonplaceholder_
 
-### `npm start`
+4. Include bootstrap link in index.html from _getbootstrap.com_
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Flow of implementation of pagination:-**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Included hooks in app.js - useState and useEffect(helps to mimic some of lifecycle components used in class component)
 
-### `npm test`
+Defined states for posts(set as empty initially), loading(set as false initially), postsPerPage(set as 10 initially) and currentPage(set as 1 initially) using useState
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Used async-await function along with axios to fetch the posts data from api(axios.get('url') in useEffect Hook.
 
-### `npm run build`
+Created a folder of components and in that created a file Posts.js for listing posts to app and imported Posts.js file in App.js and passed in props - posts and loading in calling Posts component.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Three things that needs to be defined in App.js are - 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   * indexOfLastPost = currentPage * postsPerPage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   * indexOfFirstPost = indexOfLastPost - postsPerPage
 
-### `npm run eject`
+   * currentposts = posts.slice(inbdexOfFirstPost,indexOfLastPost)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Created new file in components folder - Pagination.js
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Applied for loop from 1 to totalPosts/postsPerPage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Imported Pagination.js to App.js and sent two props totalPosts which is equal to posts.length and postsPerPage.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To apply pagination, we have to pass one more prop called paginate to pagination which will take number as an argumnet and will setCurrentPage to that number.
